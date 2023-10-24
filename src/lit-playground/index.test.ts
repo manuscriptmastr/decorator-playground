@@ -1,8 +1,8 @@
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
-import type { LitPlayground } from './lit-playground.js';
-import './lit-playground.js';
+import type { LitPlayground } from './index.js';
+import './index.js';
 
 describe('LitPlayground', () => {
   let element: LitPlayground;
