@@ -1,11 +1,11 @@
-import { html, TemplateResult } from "lit";
-import "../src/lit-playground.js";
+import { html, TemplateResult } from 'lit';
+import '../src/lit-playground.js';
 
 export default {
-  title: "LitPlayground",
-  component: "lit-playground",
+  title: 'LitPlayground',
+  component: 'lit-playground',
   argTypes: {
-    backgroundColor: { control: "color" },
+    backgroundColor: { control: 'color' },
   },
 };
 
@@ -22,7 +22,7 @@ interface ArgTypes {
 
 const Template: Story<ArgTypes> = ({
   header,
-  backgroundColor = "white",
+  backgroundColor = 'white',
 }: ArgTypes) => html`
   <lit-playground
     style="--lit-playground-background-color: ${backgroundColor}"
@@ -32,5 +32,5 @@ const Template: Story<ArgTypes> = ({
 
 export const App = Template.bind({});
 App.args = {
-  header: "My app",
+  header: 'My app',
 };
