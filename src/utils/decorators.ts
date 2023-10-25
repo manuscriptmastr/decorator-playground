@@ -65,3 +65,11 @@ export const reactive = <T, U>(
     this.update();
   },
 });
+
+// export function bound<T extends (...args: []) => void>(
+//   method: T,
+//   context: ClassMethodDecoratorContext
+// ) {
+//   // @ts-ignore
+//   method.bind(this);
+// }
