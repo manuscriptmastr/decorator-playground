@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "ES2022",
     "module": "esnext",
     "moduleResolution": "node",
     "noEmitOnError": true,
-    "lib": ["es2017", "dom"],
+    "lib": ["es2022", "dom"],
     "strict": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
+    // "experimentalDecorators": true,
+    "useDefineForClassFields": true,
     "importHelpers": true,
     "outDir": "out-tsc",
     "sourceMap": true,

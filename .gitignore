@@ -1,9 +1,7 @@
-## editors
-/.idea
-/.vscode
-
 ## system files
 .DS_Store
+
+.rollup.cache
 
 ## npm
 /node_modules/
@@ -12,12 +10,6 @@
 ## testing
 /coverage/
 
-## temp folders
-/.tmp/
-
 # build
-/_site/
 /dist/
 /out-tsc/
-
-custom-elements.json
