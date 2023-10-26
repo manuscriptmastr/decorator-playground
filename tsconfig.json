@@ -8,8 +8,6 @@
     "strict": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "useDefineForClassFields": true,
-    "importHelpers": true,
     "outDir": "out-tsc",
     "sourceMap": true,
     "inlineSources": true,

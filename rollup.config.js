@@ -7,6 +7,7 @@ export default {
   output: {
     file: 'dist/bundle.js',
     format: 'es',
+    sourcemap: true,
   },
   plugins: [
     typescript({ sourceMap: true, outputToFilesystem: true }),
