@@ -1,7 +1,7 @@
 jest.mock('lit-html', () => ({
   render: jest.fn(),
 }));
-import { bound, customElement, persist, reactive } from './decorators';
+import { bound, customElement, persist, reactive, tap } from './decorators';
 
 describe('@bound', () => {
   it('binds a method', () => {
@@ -166,5 +166,40 @@ describe('@reactive', () => {
 
     expect(customElement.property).toBe('there');
     expect(updateSpy).toBeCalledTimes(1);
+  });
+});
+
+describe('@tap(fn)', () => {
+  it('runs function when property getter is called', () => {
+    const tapSpy = jest.fn();
+
+    class TestClass {
+      @tap(tapSpy)
+      accessor count = 0;
+    }
+
+    const testClass = new TestClass();
+
+    expect(tapSpy).not.toBeCalled();
+    expect(testClass.count).toBe(0);
+    expect(tapSpy).toBeCalledTimes(1);
+  });
+
+  it('runs function when property setter is called', () => {
+    const tapSpy = jest.fn();
+
+    class TestClass {
+      @tap(tapSpy)
+      accessor count = 0;
+    }
+
+    const testClass = new TestClass();
+
+    expect(tapSpy).not.toBeCalled();
+
+    testClass.count = 1;
+
+    expect(tapSpy).toBeCalledTimes(1);
+    expect(testClass.count).toBe(1);
   });
 });
