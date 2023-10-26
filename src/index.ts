@@ -1,1 +1,1 @@
-import './lit-playground';
+import './app-root';

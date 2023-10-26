@@ -2,11 +2,11 @@ import { html } from 'lit-html';
 import { Renderable } from '../types';
 import { bound, customElement, reactive, tap } from '../utils/decorators';
 
-@customElement('lit-playground')
-export class LitPlayground extends HTMLElement implements Renderable {
+@customElement('app-root')
+export class AppRoot extends HTMLElement implements Renderable {
   @tap(console.log)
   @reactive
-  accessor header = 'My app';
+  accessor header = 'Welcome to Lit Playground!';
 
   @bound
   handleInput(event: InputEvent) {
