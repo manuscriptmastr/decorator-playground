@@ -1,11 +1,22 @@
 import { render } from 'lit-html';
-import { Reactive } from '../types';
+import { Updateable } from '../types';
 
-type ReactiveElement = CustomElementConstructor & Reactive;
+export const bound = <U extends (...args: any[]) => any>(
+  method: U,
+  { addInitializer, name }: ClassMethodDecoratorContext
+) => {
+  addInitializer(function () {
+    // @ts-ignore
+    this[name] = this[name].bind(this);
+  });
+};
 
 export const customElement =
   (tagName: string) =>
-  (clazz: ReactiveElement, { addInitializer }: ClassDecoratorContext) => {
+  <T extends CustomElementConstructor>(
+    clazz: T,
+    { addInitializer }: ClassDecoratorContext<T>
+  ) => {
     const C = class extends clazz {
       constructor(...args: any[]) {
         super(...args);
@@ -31,45 +42,32 @@ export const customElement =
     addInitializer(() => customElements.define(tagName, C));
   };
 
-export const tap =
-  <T, U>(fn: (value: any) => void) =>
-  (
-    { get, set }: ClassAccessorDecoratorTarget<T, U>,
-    context: ClassAccessorDecoratorContext<T, U>
-  ) => ({
-    get(): U {
-      // @ts-ignore
-      const value = get.call(this);
-      fn(value);
-      return value;
-    },
-    set(value: U) {
-      fn(value);
-      // @ts-ignore
-      set.call(this, value);
-    },
-  });
-
 export const reactive = <T, U>(
   { get, set }: ClassAccessorDecoratorTarget<T, U>,
   context: ClassAccessorDecoratorContext<T, U>
 ) => ({
-  get(): U {
-    // @ts-ignore
+  get(this: T & Updateable): U {
     return get.call(this);
   },
-  set(value: U) {
-    // @ts-ignore
+  set(this: T & Updateable, value: U) {
     set.call(this, value);
-    // @ts-ignore
     this.update();
   },
 });
 
-// export function bound<T extends (...args: []) => void>(
-//   method: T,
-//   context: ClassMethodDecoratorContext
-// ) {
-//   // @ts-ignore
-//   method.bind(this);
-// }
+export const tap =
+  <T, U>(fn: (value: U) => void) =>
+  (
+    { get, set }: ClassAccessorDecoratorTarget<T, U>,
+    context: ClassAccessorDecoratorContext<T, U>
+  ) => ({
+    get(this: T): U {
+      const value = get.call(this);
+      fn(value);
+      return value;
+    },
+    set(this: T, value: U) {
+      fn(value);
+      set.call(this, value);
+    },
+  });

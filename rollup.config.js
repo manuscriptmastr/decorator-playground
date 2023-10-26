@@ -10,7 +10,11 @@ export default {
     sourcemap: true,
   },
   plugins: [
-    typescript({ sourceMap: true, outputToFilesystem: true }),
+    typescript({
+      sourceMap: true,
+      outputToFilesystem: true,
+      noEmitOnError: !process.env.ROLLUP_WATCH,
+    }),
     resolve(),
     babel({
       babelHelpers: 'bundled',

@@ -1,15 +1,14 @@
 import { html } from 'lit-html';
-import { Reactive } from '../types';
-import { customElement, reactive, tap } from '../utils/decorators';
+import { Renderable } from '../types';
+import { bound, customElement, reactive, tap } from '../utils/decorators';
 
-// @ts-ignore
 @customElement('lit-playground')
-export class LitPlayground extends HTMLElement implements Reactive {
+export class LitPlayground extends HTMLElement implements Renderable {
   @tap(console.log)
   @reactive
   accessor header = 'My app';
 
-  // @bound
+  @bound
   handleInput(event: InputEvent) {
     const target = event.target as HTMLInputElement;
     this.header = target.value;
@@ -21,7 +20,7 @@ export class LitPlayground extends HTMLElement implements Reactive {
         <h1>${this.header}</h1>
       </main>
 
-      <input value=${this.header} @input=${this.handleInput.bind(this)} />
+      <input value=${this.header} @input=${this.handleInput} />
     `;
   }
 }
