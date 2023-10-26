@@ -1,5 +1,5 @@
 import { render } from 'lit-html';
-import { Renderable, Updateable } from '../types';
+import { Updateable } from '../types';
 
 export const bound = <U extends (...args: any[]) => any>(
   method: U,
