@@ -1,11 +1,18 @@
 import { html } from 'lit-html';
 import { Renderable } from '../types';
-import { bound, customElement, reactive, tap } from '../utils/decorators';
+import {
+  bound,
+  customElement,
+  persist,
+  reactive,
+  tap,
+} from '../utils/decorators';
 
 @customElement('app-root')
 export class AppRoot extends HTMLElement implements Renderable {
   @tap(console.log)
   @reactive
+  @persist('header')
   accessor header = 'Welcome to Lit Playground!';
 
   @bound
