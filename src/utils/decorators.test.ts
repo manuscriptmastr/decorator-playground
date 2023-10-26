@@ -1,7 +1,7 @@
 jest.mock('lit-html', () => ({
   render: jest.fn(),
 }));
-import { bound, customElement, persist } from './decorators';
+import { bound, customElement, persist, reactive } from './decorators';
 
 describe('@bound', () => {
   it('binds a method', () => {
@@ -44,10 +44,10 @@ describe('@customElement(tagName)', () => {
   it('Registers a custom element with the browser', () => {
     expect(customElements.get('custom-element')).toBe(undefined);
 
-    @customElement('custom-element')
+    @customElement('custom-element-1')
     class CustomElement extends HTMLElement {}
 
-    expect(customElements.get('custom-element')).toBeTruthy();
+    expect(customElements.get('custom-element-1')).toBeTruthy();
   });
 });
 
@@ -141,5 +141,30 @@ describe('@persist(storageKey, storage?)', () => {
   afterEach(() => {
     sessionStorage.clear();
     localStorage.clear();
+  });
+});
+
+describe('@reactive', () => {
+  it('calls update() when property is updated', () => {
+    const updateSpy = jest.fn();
+
+    class CustomElement extends HTMLElement {
+      @reactive
+      accessor property = 'hi';
+
+      update() {
+        updateSpy();
+      }
+    }
+
+    customElements.define('custom-element-2', CustomElement);
+
+    const customElement = new CustomElement();
+    expect(updateSpy).not.toBeCalled();
+
+    customElement.property = 'there';
+
+    expect(customElement.property).toBe('there');
+    expect(updateSpy).toBeCalledTimes(1);
   });
 });
