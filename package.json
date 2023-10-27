@@ -1,8 +1,8 @@
 {
-  "name": "lit-playground",
-  "description": "Webcomponent lit-playground following open-wc recommendations",
+  "name": "decorator-playground",
+  "description": "",
   "license": "MIT",
-  "author": "lit-playground",
+  "author": "decorator-playground",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
