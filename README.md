@@ -6,6 +6,17 @@ Playground to build and test JS decorators. Includes:
 - TypeScript support
 - Jest tests
 
+## Wait, what are decorators?
+
+JavaScript classes have historically been ugly to write and hard to refactor. (Already supported) additions like `class`, `#privateProperty`, and getters/setters have gone a long way toward making them more pleasant to build, but until now, creating complex classes has been clunky.
+
+Decorators, unlike class inheritance or mixins, can decorate entire classes _or single properties_ with functionality. They are composable like functions/higher-order-functions and have a tiny surface area. Writing a decorator is:
+
+- Trivial: Making a `@reactive` decorator that updates HTML when a property is updated takes less than 10 lines of code.
+- Intuitive: Given a value and context, a decorator can simply return the original or decorated value.
+- Reusable: A `@persist(storageKey, storage)` decorator can be used in any class on any method, getter, or setter.
+- Easy to test: Decorators don't need fancy initialization or complex mock classes to be tested well.
+
 ## Resources
 
 - [Babel Decorators Plugin](https://babeljs.io/docs/babel-plugin-proposal-decorators)
