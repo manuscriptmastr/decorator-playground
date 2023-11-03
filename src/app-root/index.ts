@@ -10,7 +10,6 @@ import {
 
 @customElement('app-root')
 export class AppRoot extends HTMLElement implements Renderable {
-  @tap(console.log)
   @reactive
   @persist('header')
   accessor header = 'Welcome to Lit Playground!';
@@ -28,6 +27,8 @@ export class AppRoot extends HTMLElement implements Renderable {
       </main>
 
       <input value=${this.header} @input=${this.handleInput} />
+
+      <contact-form></contact-form>
     `;
   }
 }

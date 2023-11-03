@@ -1,6 +1,8 @@
 import { render } from 'lit-html';
 import { Updateable } from '../types';
 
+export const attribute = console.log;
+
 export const bound = <U extends (...args: any[]) => any>(
   method: U,
   { addInitializer, name }: ClassMethodDecoratorContext
